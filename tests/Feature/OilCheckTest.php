@@ -7,7 +7,7 @@ test('Create a OilCheck record on database', function () {
         'odometer_at_last_change' => 5000,
         'date_at_last_change' => '2026-01-01'
     ];
-    $response = $this->postJson(route('oilcheck.store', $oilCheck));
+    $response = $this->postJson(route('oilcheck.store'), $oilCheck);
 
     $this->assertDatabaseCount('oil_checks', 1);
 

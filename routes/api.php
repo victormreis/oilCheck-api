@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\OilCheckController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/oilcheck', fn () => response()->json(['status' => 'ok']))->name('oilcheck.store');
+Route::post('/oilcheck', [OilCheckController::class, 'store'])->name('oilcheck.store');
