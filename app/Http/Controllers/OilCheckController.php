@@ -13,4 +13,18 @@ class OilCheckController extends Controller
 
         return response()->json($oilCheck, 201);
     }
+
+    public function check(OilCheck $oilCheck)
+    {
+        $kmSinceLastChange = $oilCheck->current_odometer - $oilCheck->odometer_at_last_change;
+        $daysSinceLastChange = $oilCheck->date_at_last_change->diffInDays(today());
+        $isDue = ($daysSinceLastChange > 180) || ($kmSinceLastChange > 5000);
+
+        return response()->json([
+            ...$oilCheck->toArray(),
+            'days_since_last_change' => $daysSinceLastChange,
+            'km_since_last_change' => $kmSinceLastChange,
+            'isDue' => $isDue,
+        ]);
+    }
 }

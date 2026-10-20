@@ -16,6 +16,11 @@ class OilCheck extends Model
         'date_at_last_change',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     protected $casts = [
         'date_at_last_change' => 'date',
     ];
