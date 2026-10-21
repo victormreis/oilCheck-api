@@ -37,4 +37,25 @@ describe('OilCheck', function () {
         $response->assertUnprocessable();
     });
 
+    test('Should return an oil check record with isDue field', function () {
+        $oilCheck = OilCheck::factory()->create();
+
+        $response = $this->getjson(route('oilCheck.show', $oilCheck));
+        $response->assertOk();
+
+        expect($oilCheck)->toBeInstanceOf(OilCheck::class);
+
+        $response->assertJsonStructure([
+            'isDue',
+            'km_since_last_change',
+            'days_since_last_change',
+        ]);
+    });
+
+    test('Should return return a not found when an invalid id is given', function () {
+
+        $response = $this->getjson(route('oilCheck.show', 1));
+        $response->assertNotFound();
+    });
+
 });
