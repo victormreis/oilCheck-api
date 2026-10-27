@@ -13,4 +13,10 @@ class OilCheckController extends Controller
 
         return response()->json($oilCheck, 201);
     }
+
+    public function show(OilCheck $oilCheck) {
+
+
+        return response()->json($oilCheck);
+    }
 }
