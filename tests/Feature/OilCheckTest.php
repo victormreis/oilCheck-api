@@ -1,5 +1,8 @@
 <?php
 
+use function Pest\Laravel\assertDatabaseCount;
+use function Pest\Laravel\assertDatabaseHas;
+
 describe('Validate oilcheck creation', function () {
    test('create an oilCheck record on database', function () {
        $data = [
@@ -10,5 +13,7 @@ describe('Validate oilcheck creation', function () {
 
         $this->postJson(route('oilCheck.store'), $data)->assertCreated();
 
-   }) ;
+
+        assertDatabaseCount('oil_checks', 1);
+   });
 });
