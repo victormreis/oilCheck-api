@@ -3,6 +3,7 @@
 use App\Models\OilCheck;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
+use function PHPUnit\Framework\assertJson;
 
 describe('Validate oil Check creation', function () {
    test('create an oilCheck record on database', function () {
@@ -37,6 +38,16 @@ describe('Validate oil Check creation', function () {
        assertDatabaseCount('oil_checks', 1);
 
        $response = $this->getJson(route('oilCheck.show', $oilCheck))->assertOk();
+
+       $response->assertJsonStructure([
+           'id',
+           'date_at_last_change',
+           'km_since_last_change',
+           'days_since_last_change',
+           'km_remaining',
+           'days_remaining',
+           'is_due_for_oil_change',
+       ]);
 
 
    });
