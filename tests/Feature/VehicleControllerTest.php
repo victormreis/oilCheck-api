@@ -58,4 +58,12 @@ describe('Vehicle Controller Test', function () {
        assertDatabaseHas('vehicles', $vehicle->toArray());
 
    });
+   test('it deletes a vehicle', function () {
+       $vehicle = Vehicle::factory()->create();
+       $this->deleteJson(route('vehicles.destroy', $vehicle))->assertNoContent();
+
+       $this->assertDatabaseMissing('vehicles', $vehicle->toArray());
+
+       $this->assertDatabaseCount('vehicles', 0);
+   });
 });

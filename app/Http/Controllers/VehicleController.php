@@ -36,13 +36,7 @@ class VehicleController extends Controller
         return response()->json($vehicle);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Vehicle $vehicle)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -57,6 +51,8 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->delete();
+
+        return response()->json(null, 204);
     }
 }
