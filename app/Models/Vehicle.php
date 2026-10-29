@@ -15,4 +15,9 @@ class Vehicle extends Model
         'model',
         'year',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }
